@@ -1,1 +1,72 @@
+import json
+from pathlib import Path
+import numpy as np
+import streamlit as st
+import tensorflow as tf
+from PIL import Image
 
+st.set_page_config(page_title="Clasificación de Flores IA_ISC", layout="centered")
+st.title("Modelo predictivo de Clasificación de Flores - IA-ISC-Campus Comayagua-2026 Angeles Euceda")
+st.write("Suba una imagen de una flor para clasificar con el modelo Mobilenet V2 pre entrenado")
+
+IMG_SIZE = (224, 224)
+MODEL_DIR = Path("modelo_flores_mobilenet")
+CLASS_PATH = MODEL_DIR / "class_names.json"
+MODEL_PATHS = [MODEL_DIR / "flowers_mobilenet.keras", MODEL_DIR / "flowers_mobilenet.h5"]
+
+LABELS_ES = {
+    "daisy": "Margarita",
+    "dandelion": "Diente de León",
+    "rose": "Rosa",
+    "sunflower": "Girasol",
+    "tulip": "Tulipán"
+}
+
+@st.cache_resource
+def cargar_modelo():
+    for path in MODEL_PATHS:
+        if path.exists():
+            return tf.keras.models.load_model(path, compile=False)
+    st.error("No se encontró el modelo. Coloque la carpeta modelo_flores_mobilenet junto a app.py.")
+    st.stop()
+
+@st.cache_data
+def cargar_clases():
+    if CLASS_PATH.exists():
+        with open(CLASS_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return ["daisy", "dandelion", "rose", "sunflower", "tulip"]
+
+
+def preparar_imagen(img):
+    img = img.convert("RGB").resize(IMG_SIZE)
+    arr = np.array(img, dtype=np.float32)
+    arr = tf.keras.applications.mobilenet_v2.preprocess_input(arr)
+    return np.expand_dims(arr, axis=0)
+
+def predecir(img):
+    preds = modelo.predict(preparar_imagen(img), verbose=0)[0]
+    top3 = np.argsort(preds)[-3:][::-1]
+    return [
+        (LABELS_ES.get(clases[i], clases[i]), float(preds[i]) * 100)
+        for i in top3
+    ]
+
+modelo = cargar_modelo()
+clases = cargar_clases()
+
+archivo = st.file_uploader("Seleccione una imagen de una flor", type=["jpg", "jpeg", "png"])
+
+if archivo:
+    imagen = Image.open(archivo)
+    st.image(imagen, caption="Imagen analizada", use_container_width=True)
+
+    resultados = predecir(imagen)
+    st.subheader("Resultado")
+    st.success(f"Predicción principal: {resultados[0][0]} ({resultados[0][1]:.2f}%)")
+
+    st.write("Top 3 probabilidades:")
+    for clase, prob in resultados:
+        st.write(f"{clase}: {prob:.2f}%")
+else:
+    st.info("Cargue una imagen de una flor para iniciar la clasificación.")
