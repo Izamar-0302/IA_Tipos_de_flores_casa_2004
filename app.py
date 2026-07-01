@@ -12,7 +12,7 @@ st.write("Suba una imagen de una flor para clasificar con el modelo Mobilenet V2
 IMG_SIZE = (224, 224)
 MODEL_DIR = Path("Clasificacion_flores_mobilenet")
 CLASS_PATH = MODEL_DIR / "class_names.json"
-MODEL_PATHS = [MODEL_DIR / "Clasificacion_flores_mobilenet.keras", MODEL_DIR / "flowers_mobilenet.h5"]
+MODEL_PATHS = [MODEL_DIR / "Clasificacion_flores_mobilenet.keras", MODEL_DIR / "flores_mobilenet.h5"]
 
 LABELS_ES = {
     "daisy": "Margarita",
