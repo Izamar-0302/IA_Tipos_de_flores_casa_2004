@@ -10,7 +10,7 @@ st.title("Modelo predictivo de Clasificación de Flores - IA-ISC-Campus Comayagu
 st.write("Suba una imagen de una flor para clasificar con el modelo Mobilenet V2 pre entrenado")
 
 IMG_SIZE = (224, 224)
-MODEL_DIR = Path("modelo_flores_mobilenet")
+MODEL_DIR = Path("Clasificacion_flores_mobilenet")
 CLASS_PATH = MODEL_DIR / "class_names.json"
 MODEL_PATHS = [MODEL_DIR / "Clasificacion_flores_mobilenet.keras", MODEL_DIR / "flowers_mobilenet.h5"]
 
