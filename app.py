@@ -63,10 +63,8 @@ if archivo:
 
     resultados = predecir(imagen)
     st.subheader("Resultado")
-    st.success(f"Predicción principal: {resultados[0][0]} ({resultados[0][1]:.2f}%)")
+    st.success(f"Predicción principal: {resultados[0][0]} ")
 
-    st.write("Top 3 probabilidades:")
-    for clase, prob in resultados:
-        st.write(f"{clase}: {prob:.2f}%")
+   
 else:
     st.info("Cargue una imagen de una flor para iniciar la clasificación.")
