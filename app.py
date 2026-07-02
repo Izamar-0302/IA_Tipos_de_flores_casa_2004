@@ -134,7 +134,7 @@ st.markdown("""
 # ============================================================
 st.markdown('<div class="flower-icon">🌺</div>', unsafe_allow_html=True)
 st.markdown('<h1 class="main-title">Clasificador de Flores con IA</h1>', unsafe_allow_html=True)
-st.markdown('<p class="subtitle">IA-ISC • Campus Comayagua • 2026 • Angeles Euceda</p>', unsafe_allow_html=True)
+st.markdown('<p class="subtitle">IA-ISC • Campus Comayagua • 2026 • Angeles Euceda •  20221930061</p>', unsafe_allow_html=True)
 
 st.markdown("""
     <div style="text-align: center; color: #616161; margin-bottom: 2rem;">
@@ -251,10 +251,6 @@ if archivo:
             <div style="text-align: center;">
                 <div style="font-size: 4rem; margin-bottom: 0.5rem;">{icono}</div>
                 <div class="winner-badge">{ganador_nombre}</div>
-            </div>
-            <div style="text-align: center; margin-top: 1rem;">
-                <span class="confidence-text">Confianza: {ganador_prob:.1f}%</span>
-            </div>
         </div>
     """, unsafe_allow_html=True)
 
@@ -277,6 +273,6 @@ else:
 # ============================================================
 st.markdown("""
     <div class="footer">
-        🌿 Clasificador de Flores con MobileNetV2 • Proyecto IA-ISC 2026 • Angeles Euceda
+        🌿 Clasificador de Flores con MobileNetV2 • Proyecto IA-ISC 2026 
     </div>
 """, unsafe_allow_html=True)
