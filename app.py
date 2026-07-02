@@ -214,8 +214,6 @@ with st.spinner("🔄 Cargando modelo de inteligencia artificial..."):
     modelo = cargar_modelo()
     clases = cargar_clases()
 
-st.success("✅ Modelo cargado correctamente")
-
 # ============================================================
 # UPLOADER
 # ============================================================
